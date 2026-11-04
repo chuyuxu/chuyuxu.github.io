@@ -1,0 +1,10 @@
+const menuButton = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('#navigation');
+menuButton.addEventListener('click', () => {const isOpen = menuButton.getAttribute('aria-expanded') === 'true';menuButton.setAttribute('aria-expanded', String(!isOpen));navigation.classList.toggle('is-open', !isOpen);});
+document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => {menuButton.setAttribute('aria-expanded','false');navigation.classList.remove('is-open');}));
+document.addEventListener('keydown', event => {if(event.key==='Escape'){menuButton.setAttribute('aria-expanded','false');navigation.classList.remove('is-open');}});
+const citationToggle = document.querySelector('.bibtex-toggle');
+const citationPanel = document.querySelector('#eps-bibtex');
+citationToggle.addEventListener('click', () => {const expanded = citationToggle.getAttribute('aria-expanded') === 'true';citationToggle.setAttribute('aria-expanded', String(!expanded));citationPanel.hidden=expanded;citationToggle.querySelector('span').textContent=expanded?'＋':'−';});
+document.querySelector('.copy-citation').addEventListener('click',async () => {const feedback=document.querySelector('.copy-feedback');const text=citationPanel.querySelector('code').textContent;try{if(!navigator.clipboard) throw new Error('Clipboard unavailable');await navigator.clipboard.writeText(text);feedback.textContent='Copied';}catch{const range=document.createRange();range.selectNodeContents(citationPanel.querySelector('code'));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);feedback.textContent='Selected — press Ctrl/Cmd+C to copy';}});
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('nav a').forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-15% 0px -65% 0px',threshold:0});document.querySelectorAll('main section[id]').forEach(section=>observer.observe(section));}
