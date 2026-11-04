@@ -71,3 +71,16 @@ body { font-weight:450; }
 nav a,.profile-links a,.paper-links a,.bibtex-toggle { font-weight:500; }
 .authors,.venue,.experience-row p,.experience-row time { font-weight:450; }
 h3,.experience-row h3 { font-weight:600; }
+
+/* Compact workflow previews with a quiet keyword line. */
+.publication { display:grid; grid-template-columns:270px minmax(0,1fr); gap:27px; align-items:start; margin-bottom:36px; }
+.paper-figure { display:block; width:100%; height:auto; margin-top:3px; border:1px solid #e1e5de; border-radius:7px; }
+.paper-details { min-width:0; }
+.paper-keywords { display:flex; flex-wrap:wrap; gap:0 14px; list-style:none; margin:8px 0 6px; padding:0; color:var(--accent); font-size:13px; line-height:1.9; font-weight:500; }
+.paper-keywords li { white-space:nowrap; }
+@media(max-width:800px) and (min-width:601px) { .publication { grid-template-columns:220px minmax(0,1fr); gap:23px; } }
+@media(max-width:600px) { .publication { grid-template-columns:1fr; gap:15px; margin-bottom:32px; }.paper-figure { width:min(100%,360px); margin-top:0; }.paper-keywords { font-size:13px; gap:0 13px; margin-top:7px; } }
+
+.paper-figure-link { display:block; cursor:zoom-in; align-self:center; }
+.paper-figure { background:white; border-radius:3px; }
+@media(max-width:600px) { .paper-figure-link { width:min(100%,360px); } }
